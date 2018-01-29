@@ -1,6 +1,6 @@
 {
   "name": "winfileinfo",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Node module for reading file verison information on Windows",
   "keywords": [
     "file",
