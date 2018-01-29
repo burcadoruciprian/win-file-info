@@ -1,0 +1,11 @@
+# Auto detect text files and perform LF normalization
+* text=auto !eol
+
+/.git* text eol=lf
+
+*.json    text eol=crlf
+*.gyp     text eol=crlf
+*.md      text eol=crlf
+*.txt     text eol=crlf
+*.cpp     text eol=crlf
+

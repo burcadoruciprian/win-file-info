@@ -1,0 +1,14 @@
+{
+  "name": "winfileinfo",
+  "version": "0.0.1",
+  "description": "Node module for reading file verison information on Windows",
+  "keywords": [
+    "file",
+    "info",
+    "version",
+    "dll"
+  ],
+  "author": "Ciprian Burca",
+  "license": "MIT",
+  "gypfile": true
+}
