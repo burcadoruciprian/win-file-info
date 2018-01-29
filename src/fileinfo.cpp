@@ -8,7 +8,6 @@
 using v8::Array;
 using v8::Exception;
 using v8::FunctionCallbackInfo;
-using v8::Integer;
 using v8::Isolate;
 using v8::Local;
 using v8::Object;
@@ -72,18 +71,20 @@ void GetFileVersion(const FunctionCallbackInfo<Value> &args)
   int buildMinor = LOWORD(pVerInfo->dwFileVersionLS);
 
   // we'll populate this with the results
-  Local<Array> result_list = Array::New(isolate, 4);
-  result_list->Set(0, Integer::New(isolate, major));
-  result_list->Set(1, Integer::New(isolate, minor));
-  result_list->Set(2, Integer::New(isolate, buildMajor));
-  result_list->Set(3, Integer::New(isolate, buildMinor));
+  std::string version = std::to_string(major);
+  version.append(".");
+  version.append(std::to_string(minor));
+  version.append(".");
+  version.append(std::to_string(buildMajor));
+  version.append(".");
+  version.append(std::to_string(buildMinor));
 
-  args.GetReturnValue().Set(result_list);
+  args.GetReturnValue().Set(String::NewFromUtf8(isolate,version.c_str()));
 }
 
 void Init(Local<Object> exports)
 {
-  NODE_SET_METHOD(exports, "GetFileVersion", GetFileVersion);
+  NODE_SET_METHOD(exports, "getFileVersion", GetFileVersion);
 }
 
 NODE_MODULE(NODE_GYP_MODULE_NAME, Init);

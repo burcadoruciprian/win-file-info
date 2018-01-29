@@ -1,2 +1,4 @@
 .vscode/
 build/
+test.js
+*.log
