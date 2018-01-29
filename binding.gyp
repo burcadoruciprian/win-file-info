@@ -1,7 +1,7 @@
 {
   "targets": [
     {
-      "target_name": "fileinfo",
+      "target_name": "winfileinfo",
       "sources": [ "src/fileinfo.cpp" ]
     }
   ]
