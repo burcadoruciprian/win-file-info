@@ -10,5 +10,19 @@
   ],
   "author": "Ciprian Burca",
   "license": "MIT",
-  "gypfile": true
+  "gypfile": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/burcadoruciprian/win-file-info.git"
+  },
+  "bugs": {
+    "url": "https://github.com/burcadoruciprian/win-file-info/issues"
+  },
+  "homepage": "https://github.com/burcadoruciprian/win-file-info#readme",
+  "scripts": {
+    "install": "node-gyp clean configure build"
+  },
+  "os": [
+    "win32"
+  ]
 }
