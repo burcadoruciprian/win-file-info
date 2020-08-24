@@ -13,6 +13,7 @@ using v8::Local;
 using v8::Object;
 using v8::String;
 using v8::Value;
+using v8::NewStringType;
 
 void GetFileVersion(const FunctionCallbackInfo<Value> &args)
 {
@@ -22,18 +23,18 @@ void GetFileVersion(const FunctionCallbackInfo<Value> &args)
   {
     // Throw an Error that is passed back to JavaScript
     isolate->ThrowException(Exception::TypeError(
-        String::NewFromUtf8(isolate, "Wrong number of arguments")));
+        String::NewFromUtf8(isolate, "Wrong number of arguments", NewStringType::kNormal).ToLocalChecked()));
     return;
   }
 
   if (!args[0]->IsString())
   {
     isolate->ThrowException(Exception::TypeError(
-        String::NewFromUtf8(isolate, "Wrong argument type. File path expected")));
+        String::NewFromUtf8(isolate, "Wrong argument type. File path expected", NewStringType::kNormal).ToLocalChecked()));
     return;
   }
 
-  String::Utf8Value arg0(args[0]->ToString());
+  String::Utf8Value arg0(isolate, args[0]);
   std::string temp = std::string(*arg0);
   std::wstring filePath = std::wstring(temp.begin(), temp.end());
 
@@ -42,7 +43,7 @@ void GetFileVersion(const FunctionCallbackInfo<Value> &args)
   if (NULL == versionDataSize)
   {
     std::string errMsg = "::GetFileVersionInfoSize failed. Error: " + std::to_string(GetLastError());
-    isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, errMsg.c_str())));
+    isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, errMsg.c_str(), NewStringType::kNormal).ToLocalChecked()));
     return;
   }
 
@@ -51,7 +52,7 @@ void GetFileVersion(const FunctionCallbackInfo<Value> &args)
   if (!ret)
   {
     std::string errMsg = "::GetFileVersionInfo failed. Error: " + std::to_string(GetLastError());
-    isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, errMsg.c_str())));
+    isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, errMsg.c_str(), NewStringType::kNormal).ToLocalChecked()));
     return;
   }
 
@@ -61,7 +62,7 @@ void GetFileVersion(const FunctionCallbackInfo<Value> &args)
   if (!ret)
   {
     std::string errMsg = "::VerQueryValue failed. Error: " + std::to_string(GetLastError());
-    isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, errMsg.c_str())));
+    isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, errMsg.c_str(), NewStringType::kNormal).ToLocalChecked()));
     return;
   }
 
@@ -79,7 +80,7 @@ void GetFileVersion(const FunctionCallbackInfo<Value> &args)
   version.append(".");
   version.append(std::to_string(buildMinor));
 
-  args.GetReturnValue().Set(String::NewFromUtf8(isolate,version.c_str()));
+  args.GetReturnValue().Set(String::NewFromUtf8(isolate,version.c_str(), NewStringType::kNormal).ToLocalChecked());
 }
 
 void Init(Local<Object> exports)
