@@ -1,5 +1,5 @@
 .vscode/
 build/
-test.js
 *.log
 *.node
+package-lock.json

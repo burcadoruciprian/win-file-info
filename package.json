@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/burcadoruciprian/win-file-info#readme",
   "scripts": {
-    "install": "node-gyp clean configure build"
+    "install": "node-gyp clean configure build",
+    "test": "node ./test.js"
   },
   "os": [
     "win32"
