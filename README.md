@@ -7,9 +7,6 @@ function. For now only the **FileVersion** is returned
 
 ## Installation
 
-Requirements:
-* **Visual Studio 2015** or **Visual C++ 2015 Build Tools**
-
 ```bash
 npm install winfileinfo
 ```
