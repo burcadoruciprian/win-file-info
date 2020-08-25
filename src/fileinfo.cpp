@@ -4,6 +4,9 @@
 #include <Windows.h>
 #include <string>
 #include <memory>
+#include <node_version.h>
+
+#define NODE_7_0_MODULE_VERSION  51
 
 using v8::Array;
 using v8::Exception;
@@ -34,7 +37,11 @@ void GetFileVersion(const FunctionCallbackInfo<Value> &args)
     return;
   }
 
+#if NODE_MODULE_VERSION > NODE_7_0_MODULE_VERSION
   String::Utf8Value arg0(isolate, args[0]);
+#else
+  String::Utf8Value arg0(args[0]);
+#endif
   std::string temp = std::string(*arg0);
   std::wstring filePath = std::wstring(temp.begin(), temp.end());
 
